@@ -11,7 +11,23 @@
     <title>Hello, world!</title>
 </head>
 <body>
-@yield('content')
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            @yield('content')
+        </div>
+        <div class="col-4">
+            @guest
+                @include('login-form')
+            @endguest
+            @auth
+                <p>Hi, {{ auth()->user()->username }}</p>
+                <p><a href="{{ route('ad.create') }}" class="btn btn-primary">Create Ad</a></p>
+                <p><a href="{{ route('logout') }}" class="btn btn-primary">Logout</a></p>
+            @endauth
+        </div>
+    </div>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

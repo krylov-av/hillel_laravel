@@ -122,3 +122,19 @@ factory(\App\User::class, 10)->create();
 php artisan db:seed --class=PostSeeder
 
 После этого заполнения данными, создастся 10 постов, 10 пользователей и 10 категорий.
+
+=======================
+#добавим police для модели Ad
+php artisan make:policy AdPolicy --model=Ad
+
+#debug pannel
+composer require barryvdh/laravel-debugbar --dev
+=====================
+OAuth ver.2
+шаг 1) Создать приложение            redirect uri/callback uri
+       public_key, client_id
+       private_key
+Шаг2) генерация ссылки
+Шаг3) Запрос токена
+        (?code=)
+Шаг4) имея токен можно вытаскивать информацию

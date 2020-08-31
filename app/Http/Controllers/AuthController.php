@@ -13,6 +13,7 @@ class AuthController extends Controller
     }
     public function check()
     {
+        $referer = request()->server('HTTP_REFERER');
         $credentials=[
             'username'=>\request()->get('username'),
             'password'=>\request()->get('password')
@@ -20,15 +21,17 @@ class AuthController extends Controller
         $remember = \request()->get('remember')==='on';
         if (!Auth::attempt($credentials,$remember))
         {
-            return redirect()->route('login')
+            return redirect()->to($referer)
                 ->withErrors(['username'=>'Login or password is incorrect']);
         }
-        return redirect()->route('mainpage');
+
+
+        return redirect()->to($referer);
     }
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('mainpage');
+        return redirect()->to(request()->server('HTTP_REFERER'));
     }
     public function loginAsUser()
     {

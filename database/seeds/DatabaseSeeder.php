@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             $category = \App\Category::inRandomOrder()->first();
             $posts = factory(\App\Post::class, 10)->make(['user_id'=>$user->id,'category_id'=>$category]);
             $user->posts()->saveMany($posts);
+            $ads = factory(\App\Ad::class,50)->create(['user_id'=>$user->id]);
         }
 
         $tags = factory(\App\Tag::class, 20)->create();
