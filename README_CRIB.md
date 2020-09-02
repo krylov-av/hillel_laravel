@@ -129,6 +129,17 @@ php artisan make:policy AdPolicy --model=Ad
 
 #debug pannel
 composer require barryvdh/laravel-debugbar --dev
+
+#добавим middleware
+php artisan make:middleware CheckAdAuthor
+
+добавить в роутер
+Route::middleware(\App\Http\Middleware\CheckAdAuthor::class)
+   ->get('/edit/{id?}',function($id = null){
+   ...
+   
+
+
 =====================
 OAuth ver.2
 шаг 1) Создать приложение            redirect uri/callback uri

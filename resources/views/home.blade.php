@@ -1,5 +1,7 @@
 @extends('layout')
 
+@section('title','List of Ads')
+
 @section('content')
     @if (Session::has('success'))
         <div class="alert alert-success" role="alert">
@@ -14,10 +16,16 @@
     @forelse($ads as $ad)
     <div class="card mb-3">
         <div class="card-body">
+            @guest
             <h5 class="card-title"><a href="/{{ $ad->id }}">{{ $ad->title }}</a></h5>
-            <p class="card-text">{{ $ad->description }}</p>
+            <p class="card-text">{{-- $ad->description --}}{!! Str::limit($ad->description,20,'...(<a href="/'.$ad->id.'">read more</a>)') !!}</p>
+            @endguest
+            @auth
+                <h5 class="card-title"><a href="/{{ route('ad.create',$ad->id) }}">{{ $ad->title }}</a></h5>
+                <p class="card-text">{{-- $ad->description --}}{{ Str::limit($ad->description,40,'...(<a href="'.route('ad.create',$ad->id).'">read more</a>)') }}</p>
+            @endauth
             @can('update',$ad)
-                <a href="#" class="btn btn-primary">update</a>
+                <a href="{{ route('ad.create',$ad->id) }}" class="btn btn-primary">update</a>
             @endcan
             @can('delete',$ad)
                 <a href="{{ route('ad_delete',$ad->id) }}" class="btn btn-danger">delete</a>

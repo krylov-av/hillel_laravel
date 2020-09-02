@@ -9,6 +9,7 @@ $factory->define(\App\Ad::class, function (Faker $faker) {
     return [
         'user_id'=> factory(\App\User::class),
         'title' => $faker->sentence,
-        'description' => implode(' ',$faker->sentences),
+        //'description' => implode(' ',$faker->sentences),
+        'description' => $faker->sentences(12,true),
     ];
 });

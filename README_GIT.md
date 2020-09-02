@@ -5,3 +5,4 @@
 2. git filter-branch --tree-filter "rm -rf .idea" HEAD
 3. git push gh master --force
 ---
+Source tree = software for graph access to git
